@@ -13,8 +13,8 @@ import (
 )
 
 const (
-	serverIP          = "127.0.0.1"
-	serverPort        = "54321"
+	serverIP          = "34.72.61.45"
+	serverPort        = "6735"
 	serverType        = "udp4"
 	bufferSize        = 2048
 	appLayerProto     = "jarkom-quic-sample-minjar"
