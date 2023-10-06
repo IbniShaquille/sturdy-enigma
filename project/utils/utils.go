@@ -21,8 +21,8 @@ type LRTPIDSPacketFixed struct {
 	IsNewTrain        any
 	IsUpdateTrain     any
 	IsDeleteTrain     any
-	IsTrainArriving   any
-	IsTrainDeparting  any
+	IsTrainArriving   bool
+	IsTrainDeparting  bool
 	TrainNumber       any
 	DestinationLength uint8
 }
