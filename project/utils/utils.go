@@ -44,7 +44,7 @@ func Decoder(rawMessage []byte) LRTPIDSPacket {
 	bytesReader := bytes.NewReader(rawMessage)
 	binary.Read(bytesReader, binary.BigEndian, &decodedFixedSegment)
 
-	destinationStringRaw := make([]byte, int64(*decodedFixedSegment.DestinationLength))
+	destinationStringRaw := make([]byte, (decodedFixedSegment.DestinationLength))
 	bytesReader.Read(destinationStringRaw)
 
 	destinationString := string(destinationStringRaw)
