@@ -74,7 +74,7 @@ func main() {
 	}
 	fmt.Printf("[quic] Opened bidirectional stream %d to %s\n", stream.StreamID(), connection.RemoteAddr())
 
-	fmt.Printf("[quic] [Stream ID: %d] Sending message '%s'\n", stream.StreamID(), encodeA)
+	fmt.Printf("[quic] [Stream ID: %d] Sending message\n", stream.StreamID())
 	_, err = stream.Write([]byte(encodeA))
 	if err != nil {
 		log.Fatalln(err)
@@ -87,7 +87,7 @@ func main() {
 	}
 	fmt.Printf("[quic] Opened bidirectional stream %d to %s\n", stream2.StreamID(), connection.RemoteAddr())
 
-	fmt.Printf("[quic] [Stream ID: %d] Sending message '%s'\n", stream2.StreamID(), encodeB)
+	fmt.Printf("[quic] [Stream ID: %d] Sending message\n", stream2.StreamID())
 	_, err = stream2.Write([]byte(encodeB))
 	if err != nil {
 		log.Fatalln(err)
@@ -115,7 +115,7 @@ func main() {
 
 	response2 := receiveBuffer[:receiveLength2]
 	responseMessage2 := utils.Decoder(response2)
-	fmt.Printf("[quic] [Stream ID: %d] Received message: '%d'\n", stream2.StreamID(), responseMessage2)
+	fmt.Printf("[quic] [Stream ID: %d] Received message: '%+v'\n", stream2.StreamID(), responseMessage2)
 
 
 }
