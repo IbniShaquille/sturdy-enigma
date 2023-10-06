@@ -64,7 +64,7 @@ func (lp logicProcessorAndWriter) Write(receivedMessageRaw []byte) (int, error) 
 	response := Handler(receivedMessage)
 	fmt.Printf("[quic] Receive message: %s\n", response)
 
-	receivedMessage.IsAck := true
+	receivedMessage.IsAck = true
 	encodedResponse := utils.Encoder(receivedMessage)
 	writeLength, err := lp.Writer.Write([]byte(encodedResponse))
 

@@ -1,7 +1,6 @@
 package main
 
 import (
-	"bufio"
 	"context"
 	"crypto/tls"
 	"fmt"
@@ -40,13 +39,13 @@ func main() {
 		Destination: destination,
 	}
 
-	encodeA := utils.encode(packetA)	
+	encodeA := utils.Encoder(packetA)	
 
 	packetB := packetA
-	packetB.IsTrainDeparting := true
-	packetB.IsTrainArriving := false
+	packetB.IsTrainDeparting = true
+	packetB.IsTrainArriving = false
 
-	encodeB := utils.encode(packetB)
+	encodeB := utils.Encoder(packetB)
 
 
 	sslKeyLogFile, err := os.Create(sslKeyLogFileName)
