@@ -95,7 +95,7 @@ func main() {
 	fmt.Printf("[quic] [Stream ID: %d] Received %d bytes of message from server\n", stream.StreamID(), receiveLength)
 
 	response := receiveBuffer[:receiveLength]
-	fmt.Printf("[quic] [Stream ID: %d] Received message: '%s'\n", stream.StreamID(), response)
+	fmt.Printf("[quic] [Stream ID: %d] Received message: '%d'\n", stream.StreamID(), response)
 
 
 	receiveLength2, err := stream2.Read(receiveBuffer)
@@ -105,5 +105,5 @@ func main() {
 	fmt.Printf("[quic] [Stream ID: %d] Received %d bytes of message from server\n", stream2.StreamID(), receiveLength)
 
 	response2 := receiveBuffer[:receiveLength2]
-	fmt.Printf("[quic] [Stream ID: %d] Received message: '%s'\n", stream2.StreamID(), response2)
+	fmt.Printf("[quic] [Stream ID: %d] Received message: '%d'\n", stream2.StreamID(), response2)
 }
