@@ -22,9 +22,9 @@ const (
 
 func Handler(packet utils.LRTPIDSPacket) string {
 	if packet.IsTrainArriving {
-		return fmt.Sprintf("Mohon perhatian, kereta tujuan %d akan tiba di Peron 1", packet.Destination)
+		return fmt.Sprintf("Mohon perhatian, kereta tujuan %s akan tiba di Peron 1", packet.Destination)
 	} else if packet.IsTrainDeparting {
-		return fmt.Sprintf("Mohon perhatian, kereta tujuan %d akan diberangkatkan dari Peron 1.", packet.Destination)
+		return fmt.Sprintf("Mohon perhatian, kereta tujuan %s akan diberangkatkan dari Peron 1.", packet.Destination)
 	}
 	return ""
 }
