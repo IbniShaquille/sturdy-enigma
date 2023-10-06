@@ -8,6 +8,7 @@ import (
 	"crypto/tls"
 	"crypto/x509"
 	"encoding/pem"
+	"encoding/binary"
 	"io"
 	"log"
 	"math/big"
