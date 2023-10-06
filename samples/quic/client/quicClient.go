@@ -54,17 +54,11 @@ func main() {
 		log.Fatalln(err)
 	}
 
-	stream1, err := connection.OpenStreamSync(context.Background())
+	stream, err := connection.OpenStreamSync(context.Background())
 	if err != nil {
 		log.Fatalln(err)
 	}
-	fmt.Printf("[quic] Opened bidirectional stream %d to %s\n", stream1.StreamID(), connection.RemoteAddr())
-
-	stream2, err := connection.OpenStreamSync(context.Background())
-	if err != nil {
-		log.Fatalln(err)
-	}
-	fmt.Printf("[quic] Opened bidirectional stream %d to %s\n", stream2.StreamID(), connection.RemoteAddr())
+	fmt.Printf("[quic] Opened bidirectional stream %d to %s\n", stream.StreamID(), connection.RemoteAddr())
 
 	fmt.Printf("[quic] [Stream ID: %d] Sending message '%s'\n", stream.StreamID(), message)
 	_, err = stream.Write([]byte(message))
@@ -82,4 +76,27 @@ func main() {
 	response := receiveBuffer[:receiveLength]
 	fmt.Printf("[quic] [Stream ID: %d] Received message: '%s'\n", stream.StreamID(), response)
 
+
+	//stream 2
+	stream2, err := connection.OpenStreamSync(context.Background())
+	if err != nil {
+		log.Fatalln(err)
+	}
+	fmt.Printf("[quic] Opened bidirectional stream %d to %s\n", stream2.StreamID(), connection.RemoteAddr())
+
+	fmt.Printf("[quic] [Stream ID: %d] Sending message '%s'\n", stream2.StreamID(), message)
+	_, err = stream2.Write([]byte(message))
+	if err != nil {
+		log.Fatalln(err)
+	}
+	fmt.Printf("[quic] [Stream ID: %d] Message sent\n", stream2.StreamID())
+
+	receiveLength2, err := stream2.Read(receiveBuffer)
+	if err != nil {
+		log.Fatalln(err)
+	}
+	fmt.Printf("[quic] [Stream ID: %d] Received %d bytes of message from server\n", stream2.StreamID(), receiveLength)
+
+	response2 := receiveBuffer[:receiveLength2]
+	fmt.Printf("[quic] [Stream ID: %d] Received message: '%s'\n", stream2.StreamID(), response2)
 }

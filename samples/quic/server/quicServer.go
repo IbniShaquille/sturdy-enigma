@@ -62,16 +62,17 @@ func main() {
 func handleConnection(connection quic.Connection) {
 	fmt.Printf("[quic] Receiving connection from %s\n", connection.RemoteAddr())
 
-	stream1, err := connection.AcceptStream(context.Background())
+	stream, err := connection.AcceptStream(context.Background())
     if err != nil {
         log.Fatalln(err)
     }
-    go handleStream(connection.RemoteAddr(), stream1)
-
+	
     stream2, err := connection.AcceptStream(context.Background())
     if err != nil {
-        log.Fatalln(err)
+		log.Fatalln(err)
     }
+	
+	go handleStream(connection.RemoteAddr(), stream)
     go handleStream(connection.RemoteAddr(), stream2)
 }
 
