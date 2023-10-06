@@ -67,6 +67,11 @@ func main() {
 	}
 	fmt.Printf("[quic] [Stream ID: %d] Message sent\n", stream.StreamID())
 
+	fmt.Printf("[quic] Input message to be sent to server: ")
+	message2, err := bufio.NewReader(os.Stdin).ReadString('\n')
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	//stream 2
 	stream2, err := connection.OpenStreamSync(context.Background())
@@ -75,8 +80,8 @@ func main() {
 	}
 	fmt.Printf("[quic] Opened bidirectional stream %d to %s\n", stream2.StreamID(), connection.RemoteAddr())
 
-	fmt.Printf("[quic] [Stream ID: %d] Sending message '%s'\n", stream2.StreamID(), message)
-	_, err = stream2.Write([]byte(message))
+	fmt.Printf("[quic] [Stream ID: %d] Sending message '%s'\n", stream2.StreamID(), message2)
+	_, err = stream2.Write([]byte(message2))
 	if err != nil {
 		log.Fatalln(err)
 	}
