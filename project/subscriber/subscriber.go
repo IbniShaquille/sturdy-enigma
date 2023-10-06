@@ -61,8 +61,7 @@ func (lp logicProcessorAndWriter) Write(receivedMessageRaw []byte) (int, error) 
 
 	receivedMessage := utils.Decoder(receivedMessageRaw)
 	
-	response := Handler(receivedMessage)
-	fmt.Printf("[quic] Receive message: %s\n", response)
+	fmt.Printf("[quic] Receive message: %s\n", Handler(receivedMessage))
 
 	receivedMessage.IsAck = true
 	encodedResponse := utils.Encoder(receivedMessage)

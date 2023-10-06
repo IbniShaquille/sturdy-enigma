@@ -16,14 +16,14 @@ import (
 
 // Tipe data komponen boleh diubah, namun variabelnya jangan diubah
 type LRTPIDSPacketFixed struct {
-	TransactionId     any
-	IsAck             any
-	IsNewTrain        any
-	IsUpdateTrain     any
-	IsDeleteTrain     any
+	TransactionId     uint16
+	IsAck             bool
+	IsNewTrain        bool
+	IsUpdateTrain     bool
+	IsDeleteTrain     bool
 	IsTrainArriving   bool
 	IsTrainDeparting  bool
-	TrainNumber       any
+	TrainNumber       uint16
 	DestinationLength uint8
 }
 

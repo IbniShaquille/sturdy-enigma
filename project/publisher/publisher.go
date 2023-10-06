@@ -13,7 +13,7 @@ import (
 )
 
 const (
-	serverIP          = "10.128.0.3"
+	serverIP          = "10.142.0.2"
 	serverPort        = "6735"
 	serverType        = "udp4"
 	bufferSize        = 2048
@@ -103,17 +103,19 @@ func main() {
 	fmt.Printf("[quic] [Stream ID: %d] Received %d bytes of message from server\n", stream.StreamID(), receiveLength)
 
 	response := receiveBuffer[:receiveLength]
-	fmt.Printf("[quic] [Stream ID: %d] Received message: '%s'\n", stream.StreamID(), response)
+	responseMessage := utils.Decoder(response)
+	fmt.Printf("[quic] [Stream ID: %d] Received message: '%s'\n", stream.StreamID(), responseMessage)
 
 	//cetak packet B
 	receiveLength2, err := stream2.Read(receiveBuffer)
 	if err != nil {
 		log.Fatalln(err)
 	}
-	fmt.Printf("[quic] [Stream ID: %d] Received %d bytes of message from server\n", stream2.StreamID(), receiveLength)
+	fmt.Printf("[quic] [Stream ID: %d] Received %d bytes of message from server\n", stream2.StreamID(), receiveLength2)
 
 	response2 := receiveBuffer[:receiveLength2]
-	fmt.Printf("[quic] [Stream ID: %d] Received message: '%s'\n", stream2.StreamID(), response2)
+	responseMessage2 := utils.Decoder(response2)
+	fmt.Printf("[quic] [Stream ID: %d] Received message: '%s'\n", stream2.StreamID(), responseMessage2)
 
 
 }
