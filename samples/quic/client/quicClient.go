@@ -67,15 +67,6 @@ func main() {
 	}
 	fmt.Printf("[quic] [Stream ID: %d] Message sent\n", stream.StreamID())
 
-	receiveLength, err := stream.Read(receiveBuffer)
-	if err != nil {
-		log.Fatalln(err)
-	}
-	fmt.Printf("[quic] [Stream ID: %d] Received %d bytes of message from server\n", stream.StreamID(), receiveLength)
-
-	response := receiveBuffer[:receiveLength]
-	fmt.Printf("[quic] [Stream ID: %d] Received message: '%s'\n", stream.StreamID(), response)
-
 
 	//stream 2
 	stream2, err := connection.OpenStreamSync(context.Background())
@@ -90,6 +81,16 @@ func main() {
 		log.Fatalln(err)
 	}
 	fmt.Printf("[quic] [Stream ID: %d] Message sent\n", stream2.StreamID())
+
+	receiveLength, err := stream.Read(receiveBuffer)
+	if err != nil {
+		log.Fatalln(err)
+	}
+	fmt.Printf("[quic] [Stream ID: %d] Received %d bytes of message from server\n", stream.StreamID(), receiveLength)
+
+	response := receiveBuffer[:receiveLength]
+	fmt.Printf("[quic] [Stream ID: %d] Received message: '%s'\n", stream.StreamID(), response)
+
 
 	receiveLength2, err := stream2.Read(receiveBuffer)
 	if err != nil {
