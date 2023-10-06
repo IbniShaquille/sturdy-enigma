@@ -17,7 +17,7 @@ const (
 	serverPort        = "6735"
 	serverType        = "udp4"
 	bufferSize        = 2048
-	appLayerProto     = "jarkom-quic-sample-minjar"
+	appLayerProto     = "jarkom-quic-sample-ibni"
 	sslKeyLogFileName = "ssl-key.log"
 )
 
@@ -54,11 +54,17 @@ func main() {
 		log.Fatalln(err)
 	}
 
-	stream, err := connection.OpenStreamSync(context.Background())
+	stream1, err := connection.OpenStreamSync(context.Background())
 	if err != nil {
 		log.Fatalln(err)
 	}
-	fmt.Printf("[quic] Opened bidirectional stream %d to %s\n", stream.StreamID(), connection.RemoteAddr())
+	fmt.Printf("[quic] Opened bidirectional stream %d to %s\n", stream1.StreamID(), connection.RemoteAddr())
+
+	stream2, err := connection.OpenStreamSync(context.Background())
+	if err != nil {
+		log.Fatalln(err)
+	}
+	fmt.Printf("[quic] Opened bidirectional stream %d to %s\n", stream2.StreamID(), connection.RemoteAddr())
 
 	fmt.Printf("[quic] [Stream ID: %d] Sending message '%s'\n", stream.StreamID(), message)
 	_, err = stream.Write([]byte(message))

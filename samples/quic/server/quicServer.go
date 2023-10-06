@@ -18,7 +18,7 @@ const (
 	serverPort    = "6735"
 	serverType    = "udp4"
 	bufferSize    = 2048
-	appLayerProto = "jarkom-quic-sample-minjar"
+	appLayerProto = "jarkom-quic-sample-ibni"
 )
 
 func main() {
@@ -62,11 +62,17 @@ func main() {
 func handleConnection(connection quic.Connection) {
 	fmt.Printf("[quic] Receiving connection from %s\n", connection.RemoteAddr())
 
-	stream, err := connection.AcceptStream(context.Background())
-	if err != nil {
-		log.Fatalln(err)
-	}
-	go handleStream(connection.RemoteAddr(), stream)
+	stream1, err := connection.AcceptStream(context.Background())
+    if err != nil {
+        log.Fatalln(err)
+    }
+    go handleStream(connection.RemoteAddr(), stream1)
+
+    stream2, err := connection.AcceptStream(context.Background())
+    if err != nil {
+        log.Fatalln(err)
+    }
+    go handleStream(connection.RemoteAddr(), stream2)
 }
 
 func handleStream(clientAddress net.Addr, stream quic.Stream) {
