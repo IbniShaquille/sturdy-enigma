@@ -104,7 +104,7 @@ func main() {
 
 	response := receiveBuffer[:receiveLength]
 	responseMessage := utils.Decoder(response)
-	fmt.Printf("[quic] [Stream ID: %d] Received message: '%d'\n", stream.StreamID(), responseMessage)
+	fmt.Printf("[quic] [Stream ID: %d] Received message: '%+v'\n", stream.StreamID(), responseMessage)
 
 	//cetak packet B
 	receiveLength2, err := stream2.Read(receiveBuffer)
