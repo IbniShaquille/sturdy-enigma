@@ -67,13 +67,14 @@ func main() {
 	}
 	fmt.Printf("[quic] [Stream ID: %d] Message sent\n", stream.StreamID())
 
+
+	//stream 2
 	fmt.Printf("[quic] Input message to be sent to server: ")
 	message2, err := bufio.NewReader(os.Stdin).ReadString('\n')
 	if err != nil {
 		log.Fatalln(err)
 	}
 
-	//stream 2
 	stream2, err := connection.OpenStreamSync(context.Background())
 	if err != nil {
 		log.Fatalln(err)
