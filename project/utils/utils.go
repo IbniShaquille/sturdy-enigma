@@ -24,7 +24,7 @@ type LRTPIDSPacketFixed struct {
 	IsTrainArriving   any
 	IsTrainDeparting  any
 	TrainNumber       any
-	DestinationLength any
+	DestinationLength uint8
 }
 
 type LRTPIDSPacket struct {
