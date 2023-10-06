@@ -60,13 +60,14 @@ type logicProcessorAndWriter struct{ io.Writer }
 
 func (lp logicProcessorAndWriter) Write(receivedMessageRaw []byte) (int, error) {
 
-	receivedMessage := string(receivedMessageRaw)
-	fmt.Printf("[quic] Receive message: %s\n", receivedMessage)
-
-	response := strings.ToUpper(receivedMessage)
+	receivedMessage := utils.Decoder(receivedMessageRaw)
+	
+	response := Handler(receivedMessage)
+	fmt.Printf("[quic] Receive message: %s\n", response)
+	
+	receivedMessage.IsAck := true
+	encodedResponse := utils.Encoder(receivedMessage)
 	writeLength, err := lp.Writer.Write([]byte(response))
-
-	fmt.Printf("[quic] Send message: %s\n", response)
 
 	return writeLength, err
 }
